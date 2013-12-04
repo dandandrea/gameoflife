@@ -1,6 +1,6 @@
 This is a simple implementation of Conway's Game of Life
 
-Read more about the Game of Life here: <http://en.wikipedia.org/wiki/Conway's_Game_of_Life>
+Read more about the Game of Life [here](http://en.wikipedia.org/wiki/Conway's_Game_of_Life)
 
 Usage: java gameOfLife/GameOfLife &lt;configuration file&gt; &lt;tick delay in milliseconds&gt;
 
