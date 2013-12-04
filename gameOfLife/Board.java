@@ -222,9 +222,9 @@ public class Board {
 
             // Iterate the columns
             for (int column = 0; column < size; column++) {
-                // Display a "-" if the value is 0, otherwise display the value
+                // Display a blank if the value is 0, otherwise display the value
                 if (rowList.get(row).get(column) == 0) {
-                    stringBuilder.append("-   ");
+                    stringBuilder.append("    ");
                 } else {
                     stringBuilder.append("X   ");
                 }
