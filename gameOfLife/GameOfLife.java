@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.*;
 
 public class GameOfLife {
+	// Enable debug output here
+	public static final boolean DEBUG = false;
+
     // The main entry point for the program
     public static void main(String[] args) throws GameOfLifeException {
 	    // Introductory message
@@ -26,18 +29,18 @@ public class GameOfLife {
 			tickDelay = Integer.parseInt(args[1]);
 		}
 		catch (NumberFormatException e) {
-		    System.out.println("ERROR: Invalid tick delay");
+		    System.out.println("ERROR: Invalid tick delay provided");
 			System.exit(1);
 		}
 
 		// Was a valid filename provided?
 		File file = new File(filename);
 		if (file.exists() == false) {
-		    System.out.println("ERROR: Invalid filename");
+		    System.out.println("ERROR: Invalid filename provided");
 			System.exit(1);
 		}
 
-		// Initialize the board (and validate the file format)
+		// Initialize the board (and validate the configuration file format)
 		Board board = null;
 		try {
            	board = initializeBoard(file);
@@ -48,7 +51,6 @@ public class GameOfLife {
 		}
 
 		// Display the initial board state
-		System.out.println("Generation 0:");
 		System.out.println("");
 		System.out.println(board);
 		System.out.println("");
@@ -58,7 +60,7 @@ public class GameOfLife {
 			// Perform the tick
 			boolean wasChange = false;
 			try {
-				wasChange = board.tick();
+				wasChange = board.generate();
 			}
 			catch (GameOfLifeException e) {
 				System.out.println("ERROR: Caught an exception during a tick: " + e.getMessage());

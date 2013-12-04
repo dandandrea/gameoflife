@@ -1,7 +1,6 @@
 package gameOfLife;
 
 import java.util.*;
-import java.lang.*;
 
 public class Board {
     // Board size
@@ -37,12 +36,9 @@ public class Board {
         }
     }
 
-	// Tick: Advance the state of the board by one step
+	// Advance the state of the board by one step
 	// Returns true if there were any changes, false otherwise
-	public boolean tick() throws GameOfLifeException {
-		// Display the generation number
-		System.out.println("Generation " + generationNumber + ":");
-
+	public boolean generate() throws GameOfLifeException {
 		// Increment the generation number
 		generationNumber++;
 
@@ -56,8 +52,8 @@ public class Board {
 				// Display the live neighbor count if this cell has any
 				int liveNeighborCount = getLiveNeighborCount(row, column);
 				if (liveNeighborCount > 0) {
-					// Display the live neighbor count
-					// System.out.println("(" + row + ", " + column + ") has " + liveNeighborCount + " live neighbors");
+					// Display the live neighbor count if debug enabled
+					if (GameOfLife.DEBUG) System.out.println("(" + row + ", " + column + ") has " + liveNeighborCount + " live neighbors");
 				}
 
 				// Did it survive?
@@ -117,6 +113,12 @@ public class Board {
 		rowList.get(row - 1).set(column - 1, value);
 	}
 
+	// Get the generation number
+	public int getGenerationNumber() {
+		// Return the generation number
+		return generationNumber;
+	}
+
 	// Determine how many live neighbors a cell has
 	private int getLiveNeighborCount(int row, int column) {
 		// The live neighbor count
@@ -125,56 +127,56 @@ public class Board {
 		// Live neighbor above?
 		if (row < size && getValue(row + 1, column) == 1) {
 			// Live neighbor
-			// System.out.println("(" + row + ", " + column + ") has a live neighbor above");
+			if (GameOfLife.DEBUG) System.out.println("(" + row + ", " + column + ") has a live neighbor above");
 			liveNeighborCount++;
 		}
 
 		// Live neighbor below?
 		if (row > 1 && getValue(row - 1, column) == 1) {
 			// Live neighbor
-			// System.out.println("(" + row + ", " + column + ") has a live neighbor below");
+			if (GameOfLife.DEBUG) System.out.println("(" + row + ", " + column + ") has a live neighbor below");
 			liveNeighborCount++;
 		}
 
 		// Live neighbor to the left?
 		if (column > 1 && getValue(row, column - 1) == 1) {
 			// Live neighbor
-			// System.out.println("(" + row + ", " + column + ") has a live neighbor to the left");
+			if (GameOfLife.DEBUG) System.out.println("(" + row + ", " + column + ") has a live neighbor to the left");
 			liveNeighborCount++;
 		}
 
 		// Live neighbor to the right?
 		if (column < size && getValue(row, column + 1) == 1) {
 			// Live neighbor
-			// System.out.println("(" + row + ", " + column + ") has a live neighbor to the right");
+			if (GameOfLife.DEBUG) System.out.println("(" + row + ", " + column + ") has a live neighbor to the right");
 			liveNeighborCount++;
 		}
 
 		// Live neighbor to the upper-left?
 		if (row < size && column > 1 && getValue(row + 1, column - 1) == 1) {
 			// Live neighbor
-			// System.out.println("(" + row + ", " + column + ") has a live neighbor to the upper-left");
+			if (GameOfLife.DEBUG) System.out.println("(" + row + ", " + column + ") has a live neighbor to the upper-left");
 			liveNeighborCount++;
 		}
 
 		// Live neighbor to the upper-right?
 		if (row < size && column < size && getValue(row + 1, column + 1) == 1) {
 			// Live neighbor
-			// System.out.println("(" + row + ", " + column + ") has a live neighbor to the upper-right");
+			if (GameOfLife.DEBUG) System.out.println("(" + row + ", " + column + ") has a live neighbor to the upper-right");
 			liveNeighborCount++;
 		}
 
 		// Live neighbor to the lower-left?
 		if (row > 1 && column > 1 && getValue(row - 1, column - 1) == 1) {
 			// Live neighbor
-			// System.out.println("(" + row + ", " + column + ") has a live neighbor to the lower-left");
+			if (GameOfLife.DEBUG) System.out.println("(" + row + ", " + column + ") has a live neighbor to the lower-left");
 			liveNeighborCount++;
 		}
 
 		// Live neighbor to the lower-right?
 		if (row > 1 && column < size && getValue(row - 1, column + 1) == 1) {
 			// Live neighbor
-			// System.out.println("(" + row + ", " + column + ") has a live neighbor to the lower-right");
+			if (GameOfLife.DEBUG) System.out.println("(" + row + ", " + column + ") has a live neighbor to the lower-right");
 			liveNeighborCount++;
 		}
 
@@ -193,6 +195,10 @@ public class Board {
     public String toString() {
         // Get a StringBuilder
         StringBuilder stringBuilder = new StringBuilder();
+
+		// Add the generation number
+		stringBuilder.append("Generation " + generationNumber + ":\n");
+		stringBuilder.append("\n");
 
         // Add the column header
         stringBuilder.append("       ");
