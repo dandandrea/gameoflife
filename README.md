@@ -1,8 +1,8 @@
 This is a simple implementation of Conway's Game of Life
 
-Read more about the Game of Life here: http://en.wikipedia.org/wiki/Conway's_Game_of_Life
+Read more about the Game of Life here: http://en.wikipedia.org/wiki/Conway's\_Game\_of\_Life
 
-Usage: java GameOfLife <configuration file> <tick delay in milliseconds>
+Usage: java GameOfLife &lt;configuration file&gt; &lt;tick delay in milliseconds&gt;
 
 The configuration file holds the size of the board and which cells should be "alive" initially
 
